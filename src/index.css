@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #121714;
+    /* Խորը մութ ձիթապտղագույն/սուրճի հիմք՝ նկարի ոճով */
+    color: #f3f4f6;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+}
+
+/* Շնչառական անիմացիա նկարի տաք և ձիթապտղագույն երանգներով */
+@keyframes oliveCoffeeGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(74, 93, 79, 0.25);
+  }
+
+  50% {
+    box-shadow: 0 0 35px rgba(194, 155, 105, 0.35);
+  }
+}
+
+.breathing-glow {
+  animation: oliveCoffeeGlow 4s infinite ease-in-out;
+}
+
+/* Գլասմորֆիկ բլոկներ՝ ձիթապտղագույն և սուրճի երանգներով */
+.glass-box {
+  background: rgba(22, 30, 25, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(194, 155, 105, 0.25);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* Կոճակներ՝ նկարի տաք սուրճի և կրեմային երանգների անցումով */
+.neon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #4A5D4F, #2C3831);
+  color: #f7f4ef;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 14px;
+  border: 1px solid rgba(194, 155, 105, 0.4);
+  box-shadow: 0 8px 20px rgba(44, 56, 49, 0.4);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.neon-btn:hover {
+  background: linear-gradient(135deg, #5A6F60, #3A4A41);
+  box-shadow: 0 12px 25px rgba(194, 155, 105, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------- */
+/* Պրեմիում Սրճե-Ձիթապտղագույն Սքրոլբար */
+/* ------------------------------------- */
+
+/* Chrome, Edge, Safari-ի համար */
+::-webkit-scrollbar {
+  width: 8px;
+  /* Սքրոլի հաստությունը */
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(18, 23, 20, 0.95);
+  /* Հետքի խորը մութ գույնը */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2C3831;
+  /* Բռնակի ձիթապտղագույն երանգը */
+  border: 1px solid rgba(194, 155, 105, 0.3);
+  /* Նուրբ ոսկեգույն շրջագիծ */
+  border-radius: 9999px;
+  /* Կլորացված եզրեր */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4A5D4F;
+  /* Մկնիկը վրան պահելիս ավելի բաց կանաչ/սրճե */
+  border-color: rgba(194, 155, 105, 0.6);
+}
+
+/* Firefox-ի համար */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2C3831 rgba(18, 23, 20, 0.95);
+}
+
+/* ------------------------------------- */
+/* Պրեմիում Սրճե-Ձիթապտղագույն Սքրոլբար */
+/* ------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(18, 23, 20, 0.95);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2C3831;
+  border: 1px solid rgba(194, 155, 105, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4A5D4F;
+  border-color: rgba(194, 155, 105, 0.6);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2C3831 rgba(18, 23, 20, 0.95);
+}
+/* ----------------------------------------------------- */
+/* Պրեմիում Responsive (Բջջային և Պլանշետային) Կարգավորումներ */
+/* ----------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  /* Էջերի ընդհանուր հեռավորությունների կրճատում փոքր էկրանների համար */
+  body {
+    font-size: 14px;
+  }
+}
