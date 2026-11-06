@@ -31,6 +31,15 @@ export default function Shop() {
         setLoading(false)
     }
 
+    // Ֆունկցիա, որը դինամիկ կերպով թարգմանում է կատեգորիան ըստ ընտրված լեզվի
+    function getCategoryLabel(cat) {
+        const lower = cat?.toLowerCase().trim() || ''
+        if (lower === 'սուրճ' || lower === 'coffee' || lower === 'кофе') return t('catCoffee')
+        if (lower === 'թեյ' || lower === 'tea' || lower === 'чай') return t('catTea')
+        if (lower === 'աքսեսուար' || lower === 'accessory' || lower === 'аксессуар') return t('catAccessory')
+        return cat
+    }
+
     function addToCart(product, e) {
         if (e) e.stopPropagation()
         const existingCart = JSON.parse(localStorage.getItem('cosmic_cart')) || []
@@ -164,7 +173,7 @@ export default function Shop() {
                                         fontWeight: '700',
                                         border: '1px solid rgba(194,155,105,0.4)'
                                     }}>
-                                        {product.category}
+                                        {getCategoryLabel(product.category)}
                                     </span>
                                 </div>
 
@@ -279,7 +288,7 @@ export default function Shop() {
                                         fontWeight: '700',
                                         border: '1px solid rgba(194,155,105,0.4)'
                                     }}>
-                                        {selectedProduct.category}
+                                        {getCategoryLabel(selectedProduct.category)}
                                     </span>
                                     <span style={{ fontSize: '18px', fontWeight: '900', color: '#c29b69' }}>
                                         {selectedProduct.price} ֏
