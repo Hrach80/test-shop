@@ -50,7 +50,8 @@ export default function Cart() {
             boxSizing: 'border-box',
             width: '100%',
             display: 'flex',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            alignItems: 'flex-start'
         }}>
             <style>
                 {`
@@ -58,17 +59,29 @@ export default function Cart() {
                         .cart-container {
                             grid-template-columns: 1fr !important;
                         }
+                        .cart-item-row {
+                            flex-direction: column !important;
+                            align-items: stretch !important;
+                            gap: 14px !important;
+                        }
+                        .cart-item-actions {
+                            justify-content: space-between !important;
+                            width: 100% !important;
+                            border-top: 1px solid rgba(194,155,105,0.15);
+                            padding-top: 10px;
+                        }
                     }
                 `}
             </style>
 
             <div style={{
-                maxWidth: '1000px',
+                maxWidth: '900px',
                 width: '100%',
                 margin: '0 auto',
                 boxSizing: 'border-box',
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                alignItems: 'stretch'
             }}>
 
                 <h1 style={{ fontSize: '24px', fontWeight: '900', color: '#fff', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -124,42 +137,42 @@ export default function Cart() {
                         {/* Ապրանքների ցանկ */}
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', boxSizing: 'border-box' }}>
                             {cart.map((item) => (
-                                <div key={item.id} style={{
+                                <div key={item.id} className="cart-item-row" style={{
                                     background: 'rgba(22, 30, 25, 0.88)',
                                     border: '1px solid rgba(194, 155, 105, 0.3)',
                                     borderRadius: '16px',
-                                    padding: '14px',
+                                    padding: '16px',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
-                                    gap: '14px',
+                                    gap: '16px',
                                     boxShadow: '0 6px 15px rgba(0,0,0,0.5)',
                                     backdropFilter: 'blur(8px)',
                                     boxSizing: 'border-box',
                                     width: '100%'
                                 }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
-                                        <img src={item.image} alt={item.name} style={{ width: '50px', height: '50px', borderRadius: '10px', objectFit: 'cover', border: '1px solid rgba(194,155,105,0.3)', background: '#121714', flexShrink: 0 }} />
-                                        <div style={{ minWidth: 0 }}>
-                                            <h3 style={{ fontSize: '14px', fontWeight: 'bold', color: '#fff', margin: '0 0 3px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</h3>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '14px', minWidth: 0, flex: 1 }}>
+                                        <img src={item.image} alt={item.name} style={{ width: '55px', height: '55px', borderRadius: '10px', objectFit: 'cover', border: '1px solid rgba(194,155,105,0.3)', background: '#121714', flexShrink: 0 }} />
+                                        <div style={{ minWidth: 0, flex: 1 }}>
+                                            <h3 style={{ fontSize: '14px', fontWeight: 'bold', color: '#fff', margin: '0 0 4px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</h3>
                                             <p style={{ fontSize: '13px', fontWeight: '800', color: '#c29b69', margin: 0 }}>{item.price} ֏</p>
                                         </div>
                                     </div>
 
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+                                    <div className="cart-item-actions" style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
                                         {/* Քանակի փոփոխություն */}
-                                        <div style={{ display: 'flex', alignItems: 'center', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', borderRadius: '8px', padding: '2px' }}>
-                                            <button onClick={() => updateQuantity(item.id, -1)} style={{ background: 'transparent', border: 'none', color: '#c29b69', padding: '4px 8px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', borderRadius: '8px', padding: '3px' }}>
+                                            <button onClick={() => updateQuantity(item.id, -1)} style={{ background: 'transparent', border: 'none', color: '#c29b69', padding: '4px 8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                 <Minus style={{ width: '12px', height: '12px' }} />
                                             </button>
-                                            <span style={{ fontSize: '13px', fontWeight: 'bold', padding: '0 6px', color: '#fff' }}>{item.quantity}</span>
-                                            <button onClick={() => updateQuantity(item.id, 1)} style={{ background: 'transparent', border: 'none', color: '#c29b69', padding: '4px 8px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                                            <span style={{ fontSize: '13px', fontWeight: 'bold', padding: '0 8px', color: '#fff' }}>{item.quantity}</span>
+                                            <button onClick={() => updateQuantity(item.id, 1)} style={{ background: 'transparent', border: 'none', color: '#c29b69', padding: '4px 8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                 <Plus style={{ width: '12px', height: '12px' }} />
                                             </button>
                                         </div>
 
                                         {/* Ջնջել */}
-                                        <button onClick={() => removeItem(item.id, item.name)} style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.4)', color: '#ef4444', padding: '8px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <button onClick={() => removeItem(item.id, item.name)} style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.4)', color: '#ef4444', padding: '8px 10px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             <Trash2 style={{ width: '15px', height: '15px' }} />
                                         </button>
                                     </div>
