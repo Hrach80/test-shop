@@ -45,10 +45,12 @@ export default function Cart() {
         <div style={{
             minHeight: 'calc(100vh - 80px)',
             background: `linear-gradient(to bottom, rgba(14, 20, 16, 0.82), rgba(14, 20, 16, 0.93)), url('https://www.torrefacto.ru/upload/medialibrary/58d/902aex542rv7je68ckcxtxnrh4e9z144.png') center/cover no-repeat`,
-            padding: '30px 20px',
+            padding: '30px 16px',
             color: '#f3f4f6',
             boxSizing: 'border-box',
-            width: '100%'
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center'
         }}>
             <style>
                 {`
@@ -60,7 +62,14 @@ export default function Cart() {
                 `}
             </style>
 
-            <div style={{ maxWidth: '1000px', width: '100%', margin: '0 auto', boxSizing: 'border-box' }}>
+            <div style={{
+                maxWidth: '1000px',
+                width: '100%',
+                margin: '0 auto',
+                boxSizing: 'border-box',
+                display: 'flex',
+                flexDirection: 'column'
+            }}>
 
                 <h1 style={{ fontSize: '24px', fontWeight: '900', color: '#fff', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <ShoppingCart style={{ width: '22px', height: '22px', color: '#c29b69' }} />
@@ -75,7 +84,9 @@ export default function Cart() {
                         border: '1px solid rgba(194, 155, 105, 0.3)',
                         borderRadius: '20px',
                         backdropFilter: 'blur(10px)',
-                        boxShadow: '0 15px 35px rgba(0,0,0,0.7)'
+                        boxShadow: '0 15px 35px rgba(0,0,0,0.7)',
+                        width: '100%',
+                        boxSizing: 'border-box'
                     }}>
                         <ShoppingCart style={{ width: '48px', height: '48px', color: '#c29b69', opacity: 0.5, marginBottom: '16px' }} />
                         <h2 style={{ fontSize: '18px', color: '#fff', marginBottom: '8px' }}>{t('emptyCart')}</h2>
@@ -106,10 +117,12 @@ export default function Cart() {
                         display: 'grid',
                         gridTemplateColumns: '1.6fr 1fr',
                         gap: '20px',
-                        alignItems: 'start'
+                        alignItems: 'start',
+                        width: '100%',
+                        boxSizing: 'border-box'
                     }}>
                         {/* Ապրանքների ցանկ */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', boxSizing: 'border-box' }}>
                             {cart.map((item) => (
                                 <div key={item.id} style={{
                                     background: 'rgba(22, 30, 25, 0.88)',
@@ -122,17 +135,18 @@ export default function Cart() {
                                     gap: '14px',
                                     boxShadow: '0 6px 15px rgba(0,0,0,0.5)',
                                     backdropFilter: 'blur(8px)',
-                                    boxSizing: 'border-box'
+                                    boxSizing: 'border-box',
+                                    width: '100%'
                                 }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
-                                        <img src={item.image} alt={item.name} style={{ width: '55px', height: '55px', borderRadius: '10px', objectFit: 'cover', border: '1px solid rgba(194,155,105,0.3)', background: '#121714', flexShrink: 0 }} />
+                                        <img src={item.image} alt={item.name} style={{ width: '50px', height: '50px', borderRadius: '10px', objectFit: 'cover', border: '1px solid rgba(194,155,105,0.3)', background: '#121714', flexShrink: 0 }} />
                                         <div style={{ minWidth: 0 }}>
                                             <h3 style={{ fontSize: '14px', fontWeight: 'bold', color: '#fff', margin: '0 0 3px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</h3>
                                             <p style={{ fontSize: '13px', fontWeight: '800', color: '#c29b69', margin: 0 }}>{item.price} ֏</p>
                                         </div>
                                     </div>
 
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
                                         {/* Քանակի փոփոխություն */}
                                         <div style={{ display: 'flex', alignItems: 'center', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', borderRadius: '8px', padding: '2px' }}>
                                             <button onClick={() => updateQuantity(item.id, -1)} style={{ background: 'transparent', border: 'none', color: '#c29b69', padding: '4px 8px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
@@ -161,7 +175,8 @@ export default function Cart() {
                             padding: '24px',
                             boxShadow: '0 15px 35px rgba(0,0,0,0.7)',
                             backdropFilter: 'blur(10px)',
-                            boxSizing: 'border-box'
+                            boxSizing: 'border-box',
+                            width: '100%'
                         }}>
                             <h2 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '16px', borderBottom: '1px solid rgba(194,155,105,0.2)', paddingBottom: '10px' }}>
                                 Summary
