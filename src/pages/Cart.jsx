@@ -86,7 +86,7 @@ export default function Cart() {
                     background: 'rgba(22, 30, 25, 0.9)',
                     border: '1px solid rgba(194, 155, 105, 0.4)',
                     borderRadius: '24px',
-                    padding: '40px',
+                    padding: '30px 20px',
                     maxWidth: '440px',
                     width: '100%',
                     textAlign: 'center',
@@ -119,15 +119,35 @@ export default function Cart() {
         <div style={{
             minHeight: 'calc(100vh - 80px)',
             background: `linear-gradient(to bottom, rgba(14, 20, 16, 0.82), rgba(14, 20, 16, 0.93)), url('https://www.torrefacto.ru/upload/medialibrary/58d/902aex542rv7je68ckcxtxnrh4e9z144.png') center/cover no-repeat`,
-            padding: '30px 20px',
+            padding: '25px 15px',
             color: '#f3f4f6',
             boxSizing: 'border-box'
         }}>
+            <style>
+                {`
+                    @media (max-width: 768px) {
+                        .cart-grid {
+                            grid-template-columns: 1fr !important;
+                        }
+                        .cart-item-card {
+                            flex-direction: row;
+                            align-items: center;
+                            gap: 10px !important;
+                            padding: 10px !important;
+                        }
+                        .cart-item-img {
+                            width: 55px !important;
+                            height: 55px !important;
+                        }
+                    }
+                `}
+            </style>
+
             <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
 
                 {/* Վերնագիր */}
-                <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                    <h1 style={{ fontSize: '30px', fontWeight: '900', color: '#fff', marginBottom: '6px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '25px' }}>
+                    <h1 style={{ fontSize: '26px', fontWeight: '900', color: '#fff', marginBottom: '4px' }}>
                         Գնումների <span style={{ color: '#c29b69' }}>Զամբյուղ</span>
                     </h1>
                     <p style={{ color: '#b0b8b2', fontSize: '13px' }}>Ստուգեք ձեր ընտրված ապրանքները և ձևակերպեք պատվերը</p>
@@ -139,7 +159,7 @@ export default function Cart() {
                         background: 'rgba(22, 30, 25, 0.88)',
                         border: '1px solid rgba(194, 155, 105, 0.3)',
                         borderRadius: '20px',
-                        padding: '40px',
+                        padding: '30px 20px',
                         maxWidth: '400px',
                         margin: '40px auto',
                         boxShadow: '0 10px 25px rgba(0,0,0,0.6)',
@@ -164,12 +184,12 @@ export default function Cart() {
                         </Link>
                     </div>
                 ) : (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', alignItems: 'start' }}>
+                    <div className="cart-grid" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '20px', alignItems: 'start' }}>
 
                         {/* Ապրանքների Ցանկ */}
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             {cart.map((item) => (
-                                <div key={item.id} style={{
+                                <div key={item.id} className="cart-item-card" style={{
                                     background: 'rgba(22, 30, 25, 0.88)',
                                     border: '1px solid rgba(194, 155, 105, 0.3)',
                                     borderRadius: '16px',
@@ -181,32 +201,33 @@ export default function Cart() {
                                     boxShadow: '0 6px 20px rgba(0,0,0,0.5)',
                                     backdropFilter: 'blur(8px)'
                                 }}>
-                                    <img src={item.image} alt={item.name} style={{ width: '65px', height: '65px', objectFit: 'cover', borderRadius: '12px', border: '1px solid rgba(194,155,105,0.3)', background: '#121714' }} />
-                                    <div style={{ flexGrow: 1 }}>
-                                        <h3 style={{ fontSize: '15px', fontWeight: 'bold', color: '#fff', marginBottom: '4px' }}>{item.name}</h3>
-                                        <p style={{ fontSize: '14px', fontWeight: '800', color: '#c29b69' }}>{item.price} ֏</p>
+                                    <img className="cart-item-img" src={item.image} alt={item.name} style={{ width: '65px', height: '65px', objectFit: 'cover', borderRadius: '12px', border: '1px solid rgba(194,155,105,0.3)', background: '#121714', flexShrink: 0 }} />
+                                    <div style={{ flexGrow: 1, minWidth: 0 }}>
+                                        <h3 style={{ fontSize: '14px', fontWeight: 'bold', color: '#fff', marginBottom: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</h3>
+                                        <p style={{ fontSize: '13px', fontWeight: '800', color: '#c29b69' }}>{item.price} ֏</p>
                                     </div>
 
                                     <div style={{
                                         display: 'flex',
                                         alignItems: 'center',
-                                        gap: '10px',
+                                        gap: '8px',
                                         background: '#121714',
-                                        padding: '6px 10px',
+                                        padding: '5px 8px',
                                         borderRadius: '10px',
-                                        border: '1px solid rgba(194,155,105,0.3)'
+                                        border: '1px solid rgba(194,155,105,0.3)',
+                                        flexShrink: 0
                                     }}>
-                                        <button onClick={() => handleQuantity(item.id, -1)} style={{ background: 'transparent', border: 'none', color: '#b0b8b2', cursor: 'pointer', display: 'flex' }}>
-                                            <Minus style={{ width: '14px', height: '14px' }} />
+                                        <button onClick={() => handleQuantity(item.id, -1)} style={{ background: 'transparent', border: 'none', color: '#b0b8b2', cursor: 'pointer', display: 'flex', padding: '2px' }}>
+                                            <Minus style={{ width: '13px', height: '13px' }} />
                                         </button>
-                                        <span style={{ fontWeight: 'bold', width: '20px', textAlign: 'center', fontSize: '13px', color: '#fff' }}>{item.quantity}</span>
-                                        <button onClick={() => handleQuantity(item.id, 1)} style={{ background: 'transparent', border: 'none', color: '#b0b8b2', cursor: 'pointer', display: 'flex' }}>
-                                            <Plus style={{ width: '14px', height: '14px' }} />
+                                        <span style={{ fontWeight: 'bold', width: '18px', textAlign: 'center', fontSize: '12px', color: '#fff' }}>{item.quantity}</span>
+                                        <button onClick={() => handleQuantity(item.id, 1)} style={{ background: 'transparent', border: 'none', color: '#b0b8b2', cursor: 'pointer', display: 'flex', padding: '2px' }}>
+                                            <Plus style={{ width: '13px', height: '13px' }} />
                                         </button>
                                     </div>
 
-                                    <button onClick={() => handleRemove(item.id)} style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '6px' }}>
-                                        <Trash2 style={{ width: '18px', height: '18px' }} />
+                                    <button onClick={() => handleRemove(item.id)} style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '6px', flexShrink: 0 }}>
+                                        <Trash2 style={{ width: '16px', height: '16px' }} />
                                     </button>
                                 </div>
                             ))}
@@ -214,54 +235,54 @@ export default function Cart() {
 
                         {/* Պատվերի ձևակերպման ֆորմա */}
                         <div style={{
-                            background: 'rgba(22, 30, 25, 0.9)',
+                            background: 'rgba(22, 30, 25, 0.92)',
                             border: '1px solid rgba(194, 155, 105, 0.4)',
                             borderRadius: '20px',
-                            padding: '24px',
+                            padding: '20px',
                             boxShadow: '0 15px 35px rgba(0,0,0,0.7)',
                             backdropFilter: 'blur(10px)'
                         }}>
-                            <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '16px' }}>Պատվերի Ձևակերպում</h3>
+                            <h3 style={{ fontSize: '17px', fontWeight: 'bold', color: '#fff', marginBottom: '14px' }}>Պատվերի Ձևակերպում</h3>
 
-                            <div style={{ borderTop: '1px solid rgba(194,155,105,0.2)', paddingTop: '14px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', fontSize: '16px', fontWeight: 'bold' }}>
+                            <div style={{ borderTop: '1px solid rgba(194,155,105,0.2)', paddingTop: '12px', marginBottom: '16px', display: 'flex', justifyContent: 'space-between', fontSize: '15px', fontWeight: 'bold' }}>
                                 <span style={{ color: '#b0b8b2' }}>Ընդհանուր գումար՝</span>
                                 <span style={{ color: '#c29b69' }}>{totalPrice} ֏</span>
                             </div>
 
-                            <form onSubmit={handleCheckout} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                            <form onSubmit={handleCheckout} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                                 <div>
-                                    <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>Անուն, Ազգանուն</label>
+                                    <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '5px' }}>Անուն, Ազգանուն</label>
                                     <input
                                         type="text"
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
                                         required
                                         placeholder="Հրաչյա Վաղարշակյան"
-                                        style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', color: '#fff', fontSize: '14px', outline: 'none', boxSizing: 'border-box' }}
+                                        style={{ width: '100%', padding: '10px 12px', borderRadius: '10px', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', color: '#fff', fontSize: '13px', outline: 'none', boxSizing: 'border-box' }}
                                     />
                                 </div>
 
                                 <div>
-                                    <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>Հեռախոսահամար</label>
+                                    <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '5px' }}>Հեռախոսահամար</label>
                                     <input
                                         type="tel"
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
                                         required
                                         placeholder="+374 XX XXXXXX"
-                                        style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', color: '#fff', fontSize: '14px', outline: 'none', boxSizing: 'border-box' }}
+                                        style={{ width: '100%', padding: '10px 12px', borderRadius: '10px', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', color: '#fff', fontSize: '13px', outline: 'none', boxSizing: 'border-box' }}
                                     />
                                 </div>
 
                                 <div>
-                                    <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>Առաքման Հասցե</label>
+                                    <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '5px' }}>Առաքման Հասցե</label>
                                     <textarea
                                         value={address}
                                         onChange={(e) => setAddress(e.target.value)}
                                         required
-                                        rows="3"
+                                        rows="2"
                                         placeholder="ք. Երևան, ..."
-                                        style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', color: '#fff', fontSize: '14px', outline: 'none', boxSizing: 'border-box', resize: 'vertical' }}
+                                        style={{ width: '100%', padding: '10px 12px', borderRadius: '10px', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', color: '#fff', fontSize: '13px', outline: 'none', boxSizing: 'border-box', resize: 'vertical' }}
                                     ></textarea>
                                 </div>
 
@@ -279,7 +300,7 @@ export default function Cart() {
                                         fontWeight: '700',
                                         cursor: 'pointer',
                                         boxShadow: '0 8px 20px rgba(44,56,49,0.5)',
-                                        marginTop: '6px'
+                                        marginTop: '4px'
                                     }}
                                 >
                                     {loading ? 'Ուղարկվում է...' : 'Հաստատել Պատվերը'}

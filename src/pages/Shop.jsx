@@ -57,7 +57,7 @@ export default function Shop() {
         <div style={{
             minHeight: 'calc(100vh - 80px)',
             background: `linear-gradient(to bottom, rgba(14, 20, 16, 0.82), rgba(14, 20, 16, 0.93)), url('https://www.torrefacto.ru/upload/medialibrary/58d/902aex542rv7je68ckcxtxnrh4e9z144.png') center/cover no-repeat`,
-            padding: '40px 20px',
+            padding: '30px 15px',
             color: '#f3f4f6',
             boxSizing: 'border-box'
         }}>
@@ -77,11 +77,11 @@ export default function Shop() {
             <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
 
                 {/* Վերնագիր */}
-                <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                    <h1 style={{ fontSize: '32px', fontWeight: '900', color: '#fff', marginBottom: '8px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '25px' }}>
+                    <h1 style={{ fontSize: '28px', fontWeight: '900', color: '#fff', marginBottom: '6px' }}>
                         Մեր Ապրանքների <span style={{ color: '#c29b69' }}>Ցանկը</span>
                     </h1>
-                    <p style={{ color: '#b0b8b2', fontSize: '14px' }}>
+                    <p style={{ color: '#b0b8b2', fontSize: '13px' }}>
                         Ընտրեք ձեր սիրելի համը մեր պրեմիում հավաքածուից
                     </p>
                 </div>
@@ -102,107 +102,102 @@ export default function Shop() {
                     </div>
                 ) : (
                     <div style={{
-                        maxHeight: 'calc(100vh - 240px)',
-                        overflowY: 'auto',
-                        paddingRight: '6px',
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+                        gap: '16px',
                         paddingBottom: '20px'
                     }}>
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-                            gap: '20px'
-                        }}>
-                            {products.map((product) => (
-                                <div
-                                    key={product.id}
-                                    onClick={() => setSelectedProduct(product)}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.transform = 'translateY(-4px)'
-                                        e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.7), 0 0 15px rgba(194,155,105,0.2)'
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.transform = 'translateY(0px)'
-                                        e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.5)'
-                                    }}
+                        {products.map((product) => (
+                            <div
+                                key={product.id}
+                                onClick={() => setSelectedProduct(product)}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(-4px)'
+                                    e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.7), 0 0 15px rgba(194,155,105,0.2)'
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.transform = 'translateY(0px)'
+                                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.5)'
+                                }}
+                                style={{
+                                    background: 'rgba(22, 30, 25, 0.85)',
+                                    borderRadius: '16px',
+                                    overflow: 'hidden',
+                                    border: '1px solid rgba(194, 155, 105, 0.3)',
+                                    boxShadow: '0 8px 20px rgba(0, 0, 0, 0.5)',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.3s ease',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    padding: '14px',
+                                    backdropFilter: 'blur(8px)'
+                                }}
+                            >
+                                <div style={{
+                                    height: '150px',
+                                    width: '100%',
+                                    borderRadius: '12px',
+                                    overflow: 'hidden',
+                                    border: '1px solid rgba(194,155,105,0.2)',
+                                    background: '#121714',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    position: 'relative',
+                                    marginBottom: '12px'
+                                }}>
+                                    <img src={product.image} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    <span style={{
+                                        position: 'absolute',
+                                        top: '8px',
+                                        right: '8px',
+                                        background: 'rgba(18, 23, 20, 0.85)',
+                                        color: '#c29b69',
+                                        padding: '2px 8px',
+                                        borderRadius: '6px',
+                                        fontSize: '10px',
+                                        fontWeight: '700',
+                                        border: '1px solid rgba(194,155,105,0.4)'
+                                    }}>
+                                        {product.category}
+                                    </span>
+                                </div>
+
+                                <div style={{ marginBottom: '12px', flexGrow: 1 }}>
+                                    <h3 style={{ fontSize: '15px', fontWeight: 'bold', color: '#fff', marginBottom: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{product.name}</h3>
+                                    <p style={{ fontSize: '16px', fontWeight: '800', color: '#c29b69', margin: 0 }}>{product.price} ֏</p>
+                                </div>
+
+                                <button
+                                    onClick={(e) => addToCart(product, e)}
+                                    onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+                                    onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                                     style={{
-                                        background: 'rgba(22, 30, 25, 0.85)',
-                                        borderRadius: '16px',
-                                        overflow: 'hidden',
-                                        border: '1px solid rgba(194, 155, 105, 0.3)',
-                                        boxShadow: '0 8px 20px rgba(0, 0, 0, 0.5)',
-                                        cursor: 'pointer',
-                                        transition: 'all 0.3s ease',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        padding: '16px',
-                                        backdropFilter: 'blur(8px)'
-                                    }}
-                                >
-                                    <div style={{
-                                        height: '160px',
-                                        borderRadius: '12px',
-                                        overflow: 'hidden',
-                                        border: '1px solid rgba(194,155,105,0.2)',
-                                        background: '#121714',
+                                        width: '100%',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        position: 'relative',
-                                        marginBottom: '12px'
-                                    }}>
-                                        <img src={product.image} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                        <span style={{
-                                            position: 'absolute',
-                                            top: '8px',
-                                            right: '8px',
-                                            background: 'rgba(18, 23, 20, 0.85)',
-                                            color: '#c29b69',
-                                            padding: '2px 8px',
-                                            borderRadius: '6px',
-                                            fontSize: '10px',
-                                            fontWeight: '700',
-                                            border: '1px solid rgba(194,155,105,0.4)'
-                                        }}>
-                                            {product.category}
-                                        </span>
-                                    </div>
-
-                                    <div style={{ marginBottom: '12px' }}>
-                                        <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '6px' }}>{product.name}</h3>
-                                        <p style={{ fontSize: '18px', fontWeight: '800', color: '#c29b69' }}>{product.price} ֏</p>
-                                    </div>
-
-                                    <button
-                                        onClick={(e) => addToCart(product, e)}
-                                        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-                                        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                                        style={{
-                                            width: '100%',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            gap: '6px',
-                                            padding: '10px',
-                                            borderRadius: '10px',
-                                            fontWeight: 'bold',
-                                            fontSize: '13px',
-                                            cursor: 'pointer',
-                                            border: '1px solid rgba(194,155,105,0.4)',
-                                            background: addedId === product.id ? '#059669' : 'linear-gradient(135deg, #4A5D4F, #2C3831)',
-                                            color: '#f7f4ef',
-                                            boxShadow: '0 6px 15px rgba(44,56,49,0.5)',
-                                            transition: 'all 0.2s'
-                                        }}
-                                    >
-                                        {addedId === product.id ? (
-                                            <> <Check style={{ width: '14px', height: '14px' }} /> Ավելացված է </>
-                                        ) : (
-                                            <> <ShoppingCart style={{ width: '14px', height: '14px' }} /> Ավելացնել Զամբյուղ </>
-                                        )}
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
+                                        gap: '6px',
+                                        padding: '10px',
+                                        borderRadius: '10px',
+                                        fontWeight: 'bold',
+                                        fontSize: '13px',
+                                        cursor: 'pointer',
+                                        border: '1px solid rgba(194,155,105,0.4)',
+                                        background: addedId === product.id ? '#059669' : 'linear-gradient(135deg, #4A5D4F, #2C3831)',
+                                        color: '#f7f4ef',
+                                        boxShadow: '0 6px 15px rgba(44,56,49,0.5)',
+                                        transition: 'all 0.2s'
+                                    }}
+                                >
+                                    {addedId === product.id ? (
+                                        <> <Check style={{ width: '14px', height: '14px' }} /> Ավելացված է </>
+                                    ) : (
+                                        <> <ShoppingCart style={{ width: '14px', height: '14px' }} /> Ավելացնել Զամբյուղ </>
+                                    )}
+                                </button>
+                            </div>
+                        ))}
                     </div>
                 )}
 
@@ -220,16 +215,17 @@ export default function Shop() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         zIndex: 100,
-                        padding: '20px',
+                        padding: '15px',
                         animation: 'backdropFadeIn 0.4s ease'
                     }}>
                         <div style={{
                             background: '#161e19',
                             border: '1px solid rgba(194, 155, 105, 0.4)',
                             borderRadius: '24px',
-                            maxWidth: '560px',
+                            maxWidth: '500px',
                             width: '100%',
-                            overflow: 'hidden',
+                            maxHeight: '90vh',
+                            overflowY: 'auto',
                             boxShadow: '0 25px 50px rgba(0,0,0,0.9)',
                             position: 'relative',
                             animation: 'modalFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1)'
@@ -240,7 +236,7 @@ export default function Shop() {
                                     position: 'absolute',
                                     top: '14px',
                                     right: '14px',
-                                    background: 'rgba(0,0,0,0.6)',
+                                    background: 'rgba(0,0,0,0.7)',
                                     border: '1px solid rgba(194,155,105,0.4)',
                                     color: '#fff',
                                     width: '32px',
@@ -256,7 +252,7 @@ export default function Shop() {
                                 <X style={{ width: '16px', height: '16px' }} />
                             </button>
 
-                            <div style={{ height: '220px', width: '100%', background: '#121714' }}>
+                            <div style={{ height: '200px', width: '100%', background: '#121714' }}>
                                 <img
                                     src={selectedProduct.image}
                                     alt={selectedProduct.name}
@@ -264,7 +260,7 @@ export default function Shop() {
                                 />
                             </div>
 
-                            <div style={{ padding: '24px' }}>
+                            <div style={{ padding: '20px' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                                     <span style={{
                                         background: 'rgba(44, 56, 49, 0.8)',
@@ -277,16 +273,16 @@ export default function Shop() {
                                     }}>
                                         {selectedProduct.category}
                                     </span>
-                                    <span style={{ fontSize: '20px', fontWeight: '900', color: '#c29b69' }}>
+                                    <span style={{ fontSize: '18px', fontWeight: '900', color: '#c29b69' }}>
                                         {selectedProduct.price} ֏
                                     </span>
                                 </div>
 
-                                <h2 style={{ fontSize: '22px', fontWeight: 'bold', color: '#fff', marginBottom: '10px' }}>
+                                <h2 style={{ fontSize: '20px', fontWeight: 'bold', color: '#fff', marginBottom: '8px' }}>
                                     {selectedProduct.name}
                                 </h2>
 
-                                <p style={{ color: '#b0b8b2', fontSize: '14px', lineHeight: '1.5', marginBottom: '20px' }}>
+                                <p style={{ color: '#b0b8b2', fontSize: '13px', lineHeight: '1.5', marginBottom: '20px' }}>
                                     {selectedProduct.description || 'Այս ապրանքը չունի լրացուցիչ նկարագրություն, սակայն այն բարձրորակ պրեմիում տեսականի է։'}
                                 </p>
 
@@ -297,16 +293,18 @@ export default function Shop() {
                                             setSelectedProduct(null)
                                         }}
                                         style={{
+                                            width: '100%',
                                             background: 'linear-gradient(135deg, #4A5D4F, #2C3831)',
                                             color: '#f7f4ef',
                                             border: '1px solid rgba(194, 155, 105, 0.5)',
-                                            padding: '10px 20px',
+                                            padding: '12px',
                                             borderRadius: '12px',
-                                            fontSize: '13px',
+                                            fontSize: '14px',
                                             fontWeight: '700',
                                             cursor: 'pointer',
                                             display: 'flex',
                                             alignItems: 'center',
+                                            justifyContent: 'center',
                                             gap: '8px',
                                             boxShadow: '0 8px 20px rgba(44,56,49,0.5)',
                                             transition: 'transform 0.2s'
