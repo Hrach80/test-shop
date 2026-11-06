@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import { Plus, Trash2, Edit3, ShieldCheck, Upload, X, AlertTriangle } from 'lucide-react'
 import { supabase } from '../lib/supabaseClient'
 import { toast } from 'sonner'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function Admin() {
+    const { t } = useLanguage()
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
     const [name, setName] = useState('')
@@ -32,7 +34,7 @@ export default function Admin() {
         if (!error) {
             setProducts(data || [])
         } else {
-            toast.error('Չհաջողվեց բեռնել ապրանքները: ' + error.message)
+            toast.error('Failed to load products: ' + error.message)
         }
         setLoading(false)
     }
@@ -52,7 +54,7 @@ export default function Admin() {
     async function handleSubmit(e) {
         e.preventDefault()
         if (!name || !price) {
-            toast.error('Խնդրում ենք լրացնել անունը և գինը')
+            toast.error(t('fillNamePriceMsg'))
             return
         }
 
@@ -74,9 +76,9 @@ export default function Admin() {
                 .eq('id', editingProduct.id)
 
             if (error) {
-                toast.error('Սխալ խմբագրելիս: ' + error.message)
+                toast.error('Error: ' + error.message)
             } else {
-                toast.success('Ապրանքը հաջողությամբ թարմացվեց!')
+                toast.success(t('productUpdatedMsg'))
                 resetForm()
                 fetchProducts()
             }
@@ -86,9 +88,9 @@ export default function Admin() {
                 .insert([productData])
 
             if (error) {
-                toast.error('Սխալ ավելացնելիս: ' + error.message)
+                toast.error('Error: ' + error.message)
             } else {
-                toast.success('Ապրանքը հաջողությամբ ավելացվեց!')
+                toast.success(t('productAddedMsg'))
                 resetForm()
                 fetchProducts()
             }
@@ -126,9 +128,9 @@ export default function Admin() {
             .eq('id', productToDelete.id)
 
         if (error) {
-            toast.error('Չհաջողվեց ջնջել ապրանքը: ' + error.message)
+            toast.error('Error: ' + error.message)
         } else {
-            toast.success('Ապրանքը հաջողությամբ ջնջվեց')
+            toast.success(t('productDeletedMsg'))
             fetchProducts()
         }
         setProductToDelete(null)
@@ -185,7 +187,7 @@ export default function Admin() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                         <h2 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
                             <ShieldCheck style={{ width: '18px', height: '18px', color: '#c29b69' }} />
-                            <span>{editingProduct ? 'Խմբագրել Ապրանքը' : 'Ավելացնել Նոր Ապրանք'}</span>
+                            <span>{editingProduct ? t('editTitle') : t('adminTitle')}</span>
                         </h2>
                         {editingProduct && (
                             <button
@@ -193,50 +195,50 @@ export default function Admin() {
                                 onClick={resetForm}
                                 style={{ background: 'transparent', border: '1px solid rgba(194,155,105,0.4)', color: '#c29b69', padding: '4px 10px', borderRadius: '8px', cursor: 'pointer', fontSize: '12px' }}
                             >
-                                Չեղարկել
+                                {t('cancel')}
                             </button>
                         )}
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px', marginBottom: '14px' }}>
                         <div>
-                            <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>Ապրանքի Անուն</label>
+                            <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>{t('productName')}</label>
                             <input
                                 type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                placeholder="Օր. Ethiopian Coffee"
+                                placeholder={t('namePlaceholder')}
                                 style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', color: '#fff', fontSize: '14px', outline: 'none', boxSizing: 'border-box' }}
                             />
                         </div>
 
                         <div>
-                            <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>Գին (֏)</label>
+                            <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>{t('price')}</label>
                             <input
                                 type="number"
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
-                                placeholder="Օր. 5500"
+                                placeholder={t('pricePlaceholder')}
                                 style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', color: '#fff', fontSize: '14px', outline: 'none', boxSizing: 'border-box' }}
                             />
                         </div>
 
                         <div>
-                            <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>Կատեգորիա</label>
+                            <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>{t('category')}</label>
                             <select
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                                 style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', color: '#fff', fontSize: '14px', outline: 'none', boxSizing: 'border-box' }}
                             >
-                                <option value="Սուրճ">Սուրճ</option>
-                                <option value="Թեյ">Թեյ</option>
-                                <option value="Աքսեսուար">Աքսեսուար</option>
+                                <option value="Սուրճ">{t('catCoffee')}</option>
+                                <option value="Թեյ">{t('catTea')}</option>
+                                <option value="Աքսեսուար">{t('catAccessory')}</option>
                             </select>
                         </div>
                     </div>
 
                     <div style={{ marginBottom: '14px' }}>
-                        <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>Նկար Համակարգչից</label>
+                        <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>{t('selectImage')}</label>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                             <label style={{
                                 background: '#2C3831',
@@ -252,7 +254,7 @@ export default function Admin() {
                                 gap: '8px'
                             }}>
                                 <Upload style={{ width: '15px', height: '15px' }} />
-                                <span>Ընտրել Ֆայլ</span>
+                                <span>{t('selectImage')}</span>
                                 <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
                             </label>
                             {imagePreview && (
@@ -262,11 +264,11 @@ export default function Admin() {
                     </div>
 
                     <div style={{ marginBottom: '16px' }}>
-                        <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>Նկարագրություն</label>
+                        <label style={{ display: 'block', fontSize: '12px', fontWeight: '600', color: '#b0b8b2', marginBottom: '6px' }}>{t('description')}</label>
                         <textarea
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            placeholder="Մանրամասն համի և հատկությունների մասին..."
+                            placeholder={t('descPlaceholder')}
                             rows={2}
                             style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', background: '#121714', border: '1px solid rgba(194,155,105,0.3)', color: '#fff', fontSize: '14px', outline: 'none', boxSizing: 'border-box', resize: 'vertical' }}
                         />
@@ -291,19 +293,19 @@ export default function Admin() {
                         }}
                     >
                         <Plus style={{ width: '15px', height: '15px' }} />
-                        <span>{submitting ? 'Կատարվում է...' : editingProduct ? 'Թարմացնել Ապրանքը' : 'Ավելացնել Ապրանք'}</span>
+                        <span>{submitting ? '...' : editingProduct ? t('updateProductBtn') : t('addProductBtn')}</span>
                     </button>
                 </form>
 
                 {/* Ցանկ */}
                 <h2 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '12px' }}>
-                    Առկա Ապրանքներ ({products.length})
+                    {t('existingProducts')} ({products.length})
                 </h2>
 
                 {loading ? (
-                    <p style={{ color: '#b0b8b2', fontSize: '14px' }}>Բեռնվում են ապրանքները...</p>
+                    <p style={{ color: '#b0b8b2', fontSize: '14px' }}>Loading...</p>
                 ) : products.length === 0 ? (
-                    <p style={{ color: '#b0b8b2', fontSize: '14px' }}>Ապրանքներ դեռևս չկան։</p>
+                    <p style={{ color: '#b0b8b2', fontSize: '14px' }}>No products found.</p>
                 ) : (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingBottom: '30px' }}>
                         {products.map((p) => (
@@ -336,13 +338,13 @@ export default function Admin() {
                                         onClick={() => handleEdit(p)}
                                         style={{ background: 'rgba(44,56,49,0.7)', border: '1px solid rgba(194,155,105,0.4)', color: '#c29b69', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '12px', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                                     >
-                                        <Edit3 style={{ width: '13px', height: '13px' }} /> Խմբագրել
+                                        <Edit3 style={{ width: '13px', height: '13px' }} /> Edit
                                     </button>
                                     <button
                                         onClick={() => setProductToDelete(p)}
                                         style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.4)', color: '#ef4444', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '12px', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                                     >
-                                        <Trash2 style={{ width: '13px', height: '13px' }} /> Ջնջել
+                                        <Trash2 style={{ width: '13px', height: '13px' }} /> Delete
                                     </button>
                                 </div>
                             </div>
@@ -350,7 +352,7 @@ export default function Admin() {
                     </div>
                 )}
 
-                {/* Ջնջման հաստատման մոդալ պատուհան (Կենտրոնացված և հավասարաչափ տարածություններով) */}
+                {/* Ջնջման հաստատման մոդալ պատուհան */}
                 {productToDelete && (
                     <div style={{
                         position: 'fixed',
@@ -397,11 +399,11 @@ export default function Admin() {
                             </div>
 
                             <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#fff', marginBottom: '10px' }}>
-                                Հեռացնե՞լ ապրանքը
+                                {t('deleteConfirmTitle')}
                             </h3>
 
                             <p style={{ color: '#b0b8b2', fontSize: '14px', lineHeight: '1.5', marginBottom: '24px' }}>
-                                Դուք պատրաստվում եք հեռացնել <strong style={{ color: '#fff' }}>«{productToDelete.name}»</strong> ապրանքը։ Այս գործողությունը անհնար է վերականգնել։
+                                {t('deleteConfirmText')} <strong style={{ color: '#fff' }}>«{productToDelete.name}»</strong>?
                             </p>
 
                             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
@@ -420,7 +422,7 @@ export default function Admin() {
                                         boxSizing: 'border-box'
                                     }}
                                 >
-                                    Չեղարկել
+                                    {t('cancel')}
                                 </button>
 
                                 <button
@@ -439,7 +441,7 @@ export default function Admin() {
                                         boxSizing: 'border-box'
                                     }}
                                 >
-                                    Այո, Ջնջել
+                                    {t('yesDelete')}
                                 </button>
                             </div>
                         </div>

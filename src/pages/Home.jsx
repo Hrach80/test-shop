@@ -1,17 +1,12 @@
 import { Link } from 'react-router-dom'
 import { Sparkles, ArrowRight, Coffee, ShieldCheck, Zap } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function Home() {
+    const { t } = useLanguage()
+
     return (
-        <div style={{
-            minHeight: 'calc(100vh - 80px)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            padding: '30px 20px',
-            boxSizing: 'border-box',
-            width: '100%'
-        }}>
+        <div style={{ minHeight: 'calc(100vh - 80px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '30px 20px', boxSizing: 'border-box', width: '100%' }}>
             <style>
                 {`
                     @media (max-width: 900px) {
@@ -22,7 +17,6 @@ export default function Home() {
                 `}
             </style>
 
-            {/* Հիմնական կոնտեյներ, որը պահում է ամեն ինչ կենտրոնում և ունի հավասարաչափ մարջիններ */}
             <div style={{
                 maxWidth: '1200px',
                 width: '100%',
@@ -47,7 +41,6 @@ export default function Home() {
                     boxSizing: 'border-box'
                 }}>
 
-                    {/* Վերևի փայլուն պիտակ */}
                     <div style={{
                         display: 'inline-flex',
                         alignItems: 'center',
@@ -62,10 +55,9 @@ export default function Home() {
                         boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.1)'
                     }}>
                         <Sparkles style={{ width: '14px', height: '14px' }} />
-                        <span>Բարձր որակ և անզուգական համեր</span>
+                        <span>{t('heroTag')}</span>
                     </div>
 
-                    {/* Վերնագիր */}
                     <h1 style={{
                         fontSize: 'clamp(26px, 4vw, 42px)',
                         fontWeight: '900',
@@ -73,10 +65,9 @@ export default function Home() {
                         marginBottom: '14px',
                         lineHeight: '1.2'
                     }}>
-                        Բացահայտեք Սուրճի և Թեյի Նոր <span style={{ background: 'linear-gradient(to right, #fff, #c29b69)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Մշակույթը</span>
+                        {t('heroTitle').split(' ').slice(0, -1).join(' ')} <span style={{ background: 'linear-gradient(to right, #fff, #c29b69)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{t('heroTitle').split(' ').slice(-1)}</span>
                     </h1>
 
-                    {/* Նկարագրություն */}
                     <p style={{
                         fontSize: '15px',
                         color: '#b0b8b2',
@@ -84,10 +75,9 @@ export default function Home() {
                         margin: '0 auto 24px auto',
                         lineHeight: '1.5'
                     }}>
-                        Հատուկ ընտրված բարձր որակի հատիկներ և բուսական թեյեր՝ պատրաստված ձեր անզուգական առավոտների և ջերմ երեկոների համար։
+                        {t('heroDesc')}
                     </p>
 
-                    {/* Կոճակ՝ նուրբ հովեր անիմացիայով */}
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <Link
                             to="/shop"
@@ -115,7 +105,7 @@ export default function Home() {
                                 transition: 'all 0.3s ease'
                             }}
                         >
-                            <span>Անցնել Խանութ</span>
+                            <span>{t('shopNow')}</span>
                             <ArrowRight style={{ width: '18px', height: '18px' }} />
                         </Link>
                     </div>
@@ -143,8 +133,8 @@ export default function Home() {
                         boxSizing: 'border-box'
                     }}>
                         <Coffee style={{ width: '30px', height: '30px', color: '#c29b69', marginBottom: '12px' }} />
-                        <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '6px' }}>100% Պրեմիում Հատիկներ</h3>
-                        <p style={{ color: '#b0b8b2', fontSize: '13px', lineHeight: '1.4' }}>Բերված աշխարհի լավագույն պլանտացիաներից՝ հատուկ բուժիչ և հագեցած բույրով:</p>
+                        <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '6px' }}>{t('feature1Title')}</h3>
+                        <p style={{ color: '#b0b8b2', fontSize: '13px', lineHeight: '1.4' }}>{t('feature1Desc')}</p>
                     </div>
 
                     {/* Քարտ 2 */}
@@ -160,8 +150,8 @@ export default function Home() {
                         boxSizing: 'border-box'
                     }}>
                         <Zap style={{ width: '30px', height: '30px', color: '#c29b69', marginBottom: '12px' }} />
-                        <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '6px' }}>Արագ Առաքում Երևանում</h3>
-                        <p style={{ color: '#b0b8b2', fontSize: '13px', lineHeight: '1.4' }}>Ձեր պատվերը կհասնի անմիջապես ձեր դուռը՝ թարմ և անթերի վիճակում:</p>
+                        <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '6px' }}>{t('feature2Title')}</h3>
+                        <p style={{ color: '#b0b8b2', fontSize: '13px', lineHeight: '1.4' }}>{t('feature2Desc')}</p>
                     </div>
 
                     {/* Քարտ 3 */}
@@ -177,8 +167,8 @@ export default function Home() {
                         boxSizing: 'border-box'
                     }}>
                         <ShieldCheck style={{ width: '30px', height: '30px', color: '#c29b69', marginBottom: '12px' }} />
-                        <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '6px' }}>Վստահելի Որակ</h3>
-                        <p style={{ color: '#b0b8b2', fontSize: '13px', lineHeight: '1.4' }}>Խիստ վերահսկողություն յուրաքանչյուր տուփի և փաթեթավորման համար:</p>
+                        <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', marginBottom: '6px' }}>{t('feature3Title')}</h3>
+                        <p style={{ color: '#b0b8b2', fontSize: '13px', lineHeight: '1.4' }}>{t('feature3Desc')}</p>
                     </div>
 
                 </div>

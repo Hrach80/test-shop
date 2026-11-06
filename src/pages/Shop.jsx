@@ -3,8 +3,10 @@ import { ShoppingCart, X, Check } from 'lucide-react'
 import { supabase } from '../lib/supabaseClient'
 import { toast } from 'sonner'
 import Loader from '../components/Loader'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function Shop() {
+    const { t } = useLanguage()
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
     const [selectedProduct, setSelectedProduct] = useState(null)
@@ -24,7 +26,7 @@ export default function Shop() {
         if (!error) {
             setProducts(data || [])
         } else {
-            toast.error('Չհաջողվեց բեռնել ապրանքները բազայից')
+            toast.error('Failed to load products')
         }
         setLoading(false)
     }
@@ -43,14 +45,14 @@ export default function Shop() {
         localStorage.setItem('cosmic_cart', JSON.stringify(existingCart))
         window.dispatchEvent(new Event('storage'))
 
-        toast.success(`"${product.name}" ավելացվեց զամբյուղ!`)
+        toast.success(`"${product.name}" ${t('addedToCartMsg')}`)
 
         setAddedId(product.id)
         setTimeout(() => setAddedId(null), 1500)
     }
 
     if (loading) {
-        return <Loader text="Բեռնվում են մեր պրեմիում համերը..." />
+        return <Loader />
     }
 
     return (
@@ -80,10 +82,10 @@ export default function Shop() {
                 {/* Վերնագիր */}
                 <div style={{ textAlign: 'center', marginBottom: '30px' }}>
                     <h1 style={{ fontSize: '28px', fontWeight: '900', color: '#fff', marginBottom: '6px' }}>
-                        Մեր Ապրանքների <span style={{ color: '#c29b69' }}>Ցանկը</span>
+                        {t('shopTitle')}
                     </h1>
                     <p style={{ color: '#b0b8b2', fontSize: '13px' }}>
-                        Ընտրեք ձեր սիրելի համը մեր պրեմիում հավաքածուից
+                        {t('shopSubtitle')}
                     </p>
                 </div>
 
@@ -99,7 +101,7 @@ export default function Shop() {
                         margin: '0 auto',
                         boxShadow: '0 10px 25px rgba(0,0,0,0.6)'
                     }}>
-                        Դեռևս ապրանքներ չկան բազայում։ Ավելացրեք Ադմինի կամ տերմինալի միջոցով:
+                        {t('noProducts')}
                     </div>
                 ) : (
                     <div style={{
@@ -195,9 +197,9 @@ export default function Shop() {
                                     }}
                                 >
                                     {addedId === product.id ? (
-                                        <> <Check style={{ width: '14px', height: '14px' }} /> Ավելացված է </>
+                                        <> <Check style={{ width: '14px', height: '14px' }} /> {t('added')} </>
                                     ) : (
-                                        <> <ShoppingCart style={{ width: '14px', height: '14px' }} /> Ավելացնել Զամբյուղ </>
+                                        <> <ShoppingCart style={{ width: '14px', height: '14px' }} /> {t('addToCart')} </>
                                     )}
                                 </button>
                             </div>
@@ -205,7 +207,7 @@ export default function Shop() {
                     </div>
                 )}
 
-                {/* Մոդալ Պատուհան (Կենտրոնացված և հավասարաչափ տարածություններով) */}
+                {/* Մոդալ Պատուհան */}
                 {selectedProduct && (
                     <div style={{
                         position: 'fixed',
@@ -289,7 +291,7 @@ export default function Shop() {
                                 </h2>
 
                                 <p style={{ color: '#b0b8b2', fontSize: '13px', lineHeight: '1.5', marginBottom: '24px' }}>
-                                    {selectedProduct.description || 'Այս ապրանքը չունի լրացուցիչ նկարագրություն, սակայն այն բարձրորակ պրեմիում տեսականի է։'}
+                                    {selectedProduct.description || 'Premium selection coffee / tea.'}
                                 </p>
 
                                 <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -317,7 +319,7 @@ export default function Shop() {
                                         }}
                                     >
                                         <ShoppingCart style={{ width: '16px', height: '16px' }} />
-                                        <span>Ավելացնել Զամբյուղում</span>
+                                        <span>{t('addToCart')}</span>
                                     </button>
                                 </div>
                             </div>
