@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Plus, Trash2, Edit3, ShieldCheck, Upload, X } from 'lucide-react'
+import { Plus, Trash2, Edit3, ShieldCheck, Upload, X, AlertTriangle } from 'lucide-react'
 import { supabase } from '../lib/supabaseClient'
 import { toast } from 'sonner'
 
@@ -138,9 +138,10 @@ export default function Admin() {
         <div style={{
             minHeight: 'calc(100vh - 80px)',
             background: `linear-gradient(to bottom, rgba(14, 20, 16, 0.82), rgba(14, 20, 16, 0.93)), url('https://www.torrefacto.ru/upload/medialibrary/58d/902aex542rv7je68ckcxtxnrh4e9z144.png') center/cover no-repeat`,
-            padding: '20px 15px',
+            padding: '30px 20px',
             color: '#f3f4f6',
-            boxSizing: 'border-box'
+            boxSizing: 'border-box',
+            width: '100%'
         }}>
             <style>
                 {`
@@ -168,17 +169,18 @@ export default function Admin() {
                 `}
             </style>
 
-            <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <div style={{ maxWidth: '900px', width: '100%', margin: '0 auto', boxSizing: 'border-box' }}>
 
                 {/* Ֆորմա */}
                 <form onSubmit={handleSubmit} style={{
                     background: 'rgba(22, 30, 25, 0.9)',
                     border: '1px solid rgba(194, 155, 105, 0.4)',
                     borderRadius: '20px',
-                    padding: '20px 20px',
+                    padding: '24px',
                     boxShadow: '0 15px 35px rgba(0,0,0,0.7)',
                     marginBottom: '30px',
-                    backdropFilter: 'blur(10px)'
+                    backdropFilter: 'blur(10px)',
+                    boxSizing: 'border-box'
                 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                         <h2 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -315,7 +317,8 @@ export default function Admin() {
                                 justifyContent: 'space-between',
                                 gap: '14px',
                                 boxShadow: '0 6px 15px rgba(0,0,0,0.5)',
-                                backdropFilter: 'blur(8px)'
+                                backdropFilter: 'blur(8px)',
+                                boxSizing: 'border-box'
                             }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
                                     <img src={p.image} alt={p.name} style={{ width: '50px', height: '50px', borderRadius: '10px', objectFit: 'cover', border: '1px solid rgba(194,155,105,0.3)', background: '#121714', flexShrink: 0 }} />
@@ -347,7 +350,7 @@ export default function Admin() {
                     </div>
                 )}
 
-                {/* Ջնջման հաստատման մոդալ պատուհան */}
+                {/* Ջնջման հաստատման մոդալ պատուհան (Կենտրոնացված և հավասարաչափ տարածություններով) */}
                 {productToDelete && (
                     <div style={{
                         position: 'fixed',
@@ -362,33 +365,79 @@ export default function Admin() {
                         justifyContent: 'center',
                         zIndex: 100,
                         padding: '20px',
+                        boxSizing: 'border-box',
                         animation: 'backdropFadeIn 0.3s ease'
                     }}>
                         <div style={{
                             background: '#161e19',
                             border: '1px solid rgba(194, 155, 105, 0.4)',
-                            borderRadius: '20px',
-                            maxWidth: '400px',
+                            borderRadius: '24px',
+                            maxWidth: '420px',
                             width: '100%',
-                            padding: '24px',
+                            padding: '30px',
                             boxShadow: '0 25px 50px rgba(0,0,0,0.9)',
+                            position: 'relative',
                             textAlign: 'center',
+                            boxSizing: 'border-box',
                             animation: 'modalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
                         }}>
-                            <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#fff', marginBottom: '10px' }}>Վստահ՞ եք</h3>
-                            <p style={{ color: '#b0b8b2', fontSize: '13px', marginBottom: '20px' }}>
-                                Ցանկանում եք ջնջել <span style={{ color: '#fff', fontWeight: 'bold' }}>"{productToDelete.name}"</span> ապրանքը։
+                            <div style={{
+                                width: '50px',
+                                height: '50px',
+                                borderRadius: '50%',
+                                background: 'rgba(239, 68, 68, 0.15)',
+                                border: '1px solid rgba(239, 68, 68, 0.4)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                margin: '0 auto 16px auto',
+                                color: '#ef4444'
+                            }}>
+                                <AlertTriangle style={{ width: '24px', height: '24px' }} />
+                            </div>
+
+                            <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#fff', marginBottom: '10px' }}>
+                                Հեռացնե՞լ ապրանքը
+                            </h3>
+
+                            <p style={{ color: '#b0b8b2', fontSize: '14px', lineHeight: '1.5', marginBottom: '24px' }}>
+                                Դուք պատրաստվում եք հեռացնել <strong style={{ color: '#fff' }}>«{productToDelete.name}»</strong> ապրանքը։ Այս գործողությունը անհնար է վերականգնել։
                             </p>
-                            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+
+                            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
                                 <button
                                     onClick={() => setProductToDelete(null)}
-                                    style={{ background: 'transparent', border: '1px solid rgba(194,155,105,0.4)', color: '#fff', padding: '8px 16px', borderRadius: '10px', cursor: 'pointer', fontSize: '13px', fontWeight: '600' }}
+                                    style={{
+                                        flex: 1,
+                                        padding: '12px',
+                                        borderRadius: '12px',
+                                        background: 'rgba(255,255,255,0.05)',
+                                        border: '1px solid rgba(194, 155, 105, 0.3)',
+                                        color: '#fff',
+                                        fontSize: '14px',
+                                        fontWeight: '600',
+                                        cursor: 'pointer',
+                                        boxSizing: 'border-box'
+                                    }}
                                 >
                                     Չեղարկել
                                 </button>
+
                                 <button
                                     onClick={confirmDelete}
-                                    style={{ background: '#ef4444', border: 'none', color: '#fff', padding: '8px 16px', borderRadius: '10px', cursor: 'pointer', fontSize: '13px', fontWeight: '600', boxShadow: '0 4px 12px rgba(239,68,68,0.4)' }}
+                                    style={{
+                                        flex: 1,
+                                        padding: '12px',
+                                        borderRadius: '12px',
+                                        background: '#ef4444',
+                                        border: '1px solid rgba(239, 68, 68, 0.6)',
+                                        color: '#fff',
+                                        fontSize: '14px',
+                                        fontWeight: '700',
+                                        cursor: 'pointer',
+                                        boxShadow: '0 4px 15px rgba(239, 68, 68, 0.4)',
+                                        boxSizing: 'border-box'
+                                    }}
                                 >
                                     Այո, Ջնջել
                                 </button>

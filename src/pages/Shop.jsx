@@ -57,9 +57,10 @@ export default function Shop() {
         <div style={{
             minHeight: 'calc(100vh - 80px)',
             background: `linear-gradient(to bottom, rgba(14, 20, 16, 0.82), rgba(14, 20, 16, 0.93)), url('https://www.torrefacto.ru/upload/medialibrary/58d/902aex542rv7je68ckcxtxnrh4e9z144.png') center/cover no-repeat`,
-            padding: '30px 15px',
+            padding: '30px 20px',
             color: '#f3f4f6',
-            boxSizing: 'border-box'
+            boxSizing: 'border-box',
+            width: '100%'
         }}>
             <style>
                 {`
@@ -74,10 +75,10 @@ export default function Shop() {
                 `}
             </style>
 
-            <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+            <div style={{ maxWidth: '1200px', width: '100%', margin: '0 auto', boxSizing: 'border-box' }}>
 
                 {/* Վերնագիր */}
-                <div style={{ textAlign: 'center', marginBottom: '25px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '30px' }}>
                     <h1 style={{ fontSize: '28px', fontWeight: '900', color: '#fff', marginBottom: '6px' }}>
                         Մեր Ապրանքների <span style={{ color: '#c29b69' }}>Ցանկը</span>
                     </h1>
@@ -103,9 +104,10 @@ export default function Shop() {
                 ) : (
                     <div style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-                        gap: '16px',
-                        paddingBottom: '20px'
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+                        gap: '20px',
+                        paddingBottom: '30px',
+                        boxSizing: 'border-box'
                     }}>
                         {products.map((product) => (
                             <div
@@ -129,12 +131,13 @@ export default function Shop() {
                                     transition: 'all 0.3s ease',
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    padding: '14px',
-                                    backdropFilter: 'blur(8px)'
+                                    padding: '16px',
+                                    backdropFilter: 'blur(8px)',
+                                    boxSizing: 'border-box'
                                 }}
                             >
                                 <div style={{
-                                    height: '150px',
+                                    height: '160px',
                                     width: '100%',
                                     borderRadius: '12px',
                                     overflow: 'hidden',
@@ -187,7 +190,8 @@ export default function Shop() {
                                         background: addedId === product.id ? '#059669' : 'linear-gradient(135deg, #4A5D4F, #2C3831)',
                                         color: '#f7f4ef',
                                         boxShadow: '0 6px 15px rgba(44,56,49,0.5)',
-                                        transition: 'all 0.2s'
+                                        transition: 'all 0.2s',
+                                        boxSizing: 'border-box'
                                     }}
                                 >
                                     {addedId === product.id ? (
@@ -201,7 +205,7 @@ export default function Shop() {
                     </div>
                 )}
 
-                {/* Մոդալ Պատուհան */}
+                {/* Մոդալ Պատուհան (Կենտրոնացված և հավասարաչափ տարածություններով) */}
                 {selectedProduct && (
                     <div style={{
                         position: 'fixed',
@@ -215,19 +219,21 @@ export default function Shop() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         zIndex: 100,
-                        padding: '15px',
+                        padding: '20px',
+                        boxSizing: 'border-box',
                         animation: 'backdropFadeIn 0.4s ease'
                     }}>
                         <div style={{
                             background: '#161e19',
                             border: '1px solid rgba(194, 155, 105, 0.4)',
                             borderRadius: '24px',
-                            maxWidth: '500px',
+                            maxWidth: '480px',
                             width: '100%',
                             maxHeight: '90vh',
                             overflowY: 'auto',
                             boxShadow: '0 25px 50px rgba(0,0,0,0.9)',
                             position: 'relative',
+                            boxSizing: 'border-box',
                             animation: 'modalFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1)'
                         }}>
                             <button
@@ -260,7 +266,7 @@ export default function Shop() {
                                 />
                             </div>
 
-                            <div style={{ padding: '20px' }}>
+                            <div style={{ padding: '24px', boxSizing: 'border-box' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                                     <span style={{
                                         background: 'rgba(44, 56, 49, 0.8)',
@@ -282,11 +288,11 @@ export default function Shop() {
                                     {selectedProduct.name}
                                 </h2>
 
-                                <p style={{ color: '#b0b8b2', fontSize: '13px', lineHeight: '1.5', marginBottom: '20px' }}>
+                                <p style={{ color: '#b0b8b2', fontSize: '13px', lineHeight: '1.5', marginBottom: '24px' }}>
                                     {selectedProduct.description || 'Այս ապրանքը չունի լրացուցիչ նկարագրություն, սակայն այն բարձրորակ պրեմիում տեսականի է։'}
                                 </p>
 
-                                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center' }}>
                                     <button
                                         onClick={(e) => {
                                             addToCart(selectedProduct, e)
@@ -307,7 +313,7 @@ export default function Shop() {
                                             justifyContent: 'center',
                                             gap: '8px',
                                             boxShadow: '0 8px 20px rgba(44,56,49,0.5)',
-                                            transition: 'transform 0.2s'
+                                            boxSizing: 'border-box'
                                         }}
                                     >
                                         <ShoppingCart style={{ width: '16px', height: '16px' }} />

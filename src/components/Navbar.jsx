@@ -33,7 +33,9 @@ export default function Navbar() {
             position: 'sticky',
             top: 0,
             zIndex: 50,
-            boxShadow: '0 10px 30px rgba(0,0,0,0.8)'
+            boxShadow: '0 10px 30px rgba(0,0,0,0.8)',
+            width: '100%',
+            boxSizing: 'border-box'
         }}>
             <style>
                 {`
@@ -59,7 +61,12 @@ export default function Navbar() {
                             display: none;
                         }
                         .nav-btn {
-                            padding: 8px 10px;
+                            padding: 10px 14px !important;
+                            border-radius: 12px !important;
+                        }
+                        .nav-icon {
+                            width: 20px !important;
+                            height: 20px !important;
                         }
                         .logo-text {
                             font-size: 16px !important;
@@ -69,12 +76,13 @@ export default function Navbar() {
             </style>
 
             <div style={{
-                maxWidth: '1280px',
+                maxWidth: '1200px',
                 height: '70px',
                 margin: '0 auto',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'space-between'
+                justifyContent: 'space-between',
+                boxSizing: 'border-box'
             }}>
 
                 {/* Լոգո */}
@@ -88,7 +96,7 @@ export default function Navbar() {
                 </Link>
 
                 {/* Մենյուի կոճակներ */}
-                <nav style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <nav style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
 
                     {/* Գլխավոր */}
                     <Link
@@ -101,7 +109,7 @@ export default function Navbar() {
                             boxShadow: isActive('/') ? '0 0 12px rgba(194,155,105,0.25)' : 'none',
                         }}
                     >
-                        <Home style={{ width: '15px', height: '15px', color: isActive('/') ? '#c29b69' : '#b0b8b2' }} />
+                        <Home className="nav-icon" style={{ width: '16px', height: '16px', color: isActive('/') ? '#c29b69' : '#b0b8b2' }} />
                         <span className="nav-text">Գլխավոր</span>
                     </Link>
 
@@ -116,7 +124,7 @@ export default function Navbar() {
                             boxShadow: isActive('/shop') ? '0 0 12px rgba(194,155,105,0.25)' : 'none',
                         }}
                     >
-                        <Store style={{ width: '15px', height: '15px', color: isActive('/shop') ? '#c29b69' : '#b0b8b2' }} />
+                        <Store className="nav-icon" style={{ width: '16px', height: '16px', color: isActive('/shop') ? '#c29b69' : '#b0b8b2' }} />
                         <span className="nav-text">Խանութ</span>
                     </Link>
 
@@ -131,7 +139,7 @@ export default function Navbar() {
                             boxShadow: isActive('/admin') ? '0 0 12px rgba(194,155,105,0.25)' : 'none',
                         }}
                     >
-                        <Shield style={{ width: '15px', height: '15px', color: isActive('/admin') ? '#c29b69' : '#b0b8b2' }} />
+                        <Shield className="nav-icon" style={{ width: '16px', height: '16px', color: isActive('/admin') ? '#c29b69' : '#b0b8b2' }} />
                         <span className="nav-text">Ադմին</span>
                     </Link>
 
@@ -144,11 +152,10 @@ export default function Navbar() {
                             color: '#fff',
                             border: isActive('/cart') ? '1px solid #c29b69' : '1px solid rgba(194, 155, 105, 0.2)',
                             boxShadow: isActive('/cart') ? '0 0 12px rgba(194,155,105,0.25)' : 'none',
-                            position: 'relative',
-                            padding: '7px 12px'
+                            position: 'relative'
                         }}
                     >
-                        <ShoppingCart style={{ width: '18px', height: '18px', color: isActive('/cart') ? '#c29b69' : '#b0b8b2' }} />
+                        <ShoppingCart className="nav-icon" style={{ width: '18px', height: '18px', color: isActive('/cart') ? '#c29b69' : '#b0b8b2' }} />
                         {cartCount > 0 && (
                             <span style={{
                                 position: 'absolute',
