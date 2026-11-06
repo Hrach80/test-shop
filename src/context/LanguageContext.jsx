@@ -63,7 +63,31 @@ const translations = {
         footerDesc: "Discover the finest selection of specialty coffee, rare teas, and premium accessories delivered straight to your door.",
         quickLinks: "Quick Links",
         contactUs: "Contact Us",
-        rightsReserved: "All rights reserved."
+        rightsReserved: "All rights reserved.",
+        // ... (պահպանեք մնացածը, ավելացրեք սրանք)
+        learnTitle: "Coffee & Tea Masterclass",
+        learnSubtitle: "Learn the secrets of brewing, tasting, and selecting the finest beans",
+        readMore: "Read Guide",
+        giftTitle: "Special Gift Guide",
+        giftSubtitle: "Curated coffee and tea sets designed to delight your loved ones",
+        giftTag: "Exclusive Boxes",
+        exploreGifts: "Explore Sets",
+
+        // Learn Articles
+        art1Title: "The Art of V60 Pour Over",
+        art1Desc: "Master the precise water temperature, pour technique, and coffee-to-water ratio for a clean, bright cup.",
+        art2Title: "Choosing the Right Grind Size",
+        art2Desc: "From extra-coarse French Press to ultra-fine Espresso—how grind size dictates extraction.",
+        art3Title: "Understanding Coffee Notes",
+        art3Desc: "Explore fruity, floral, and chocolatey undertones from Ethiopia, Colombia, and beyond.",
+
+        // Gift Sets
+        gift1Title: "Morning Bliss Box",
+        gift1Desc: "Includes Single-Origin Ethiopian beans, a ceramic pour-over dripper, and a signature mug.",
+        gift2Title: "Artisan Tea Collection",
+        gift2Desc: "A selection of rare organic herbal teas packed in an elegant wooden keepsake box.",
+        gift3Title: "Ultimate Barista Kit",
+        gift3Desc: "Professional tamper, precision scale, and two bags of our top-tier dark roast blends."
         
     },
     hy: {
@@ -127,7 +151,31 @@ const translations = {
         footerDesc: "Բացահայտեք բարձրորակ սուրճի, հազվագյուտ թեյերի և պրեմիում աքսեսուարների լավագույն տեսականին՝ առաքված անմիջապես ձեր դուռը։",
         quickLinks: "Արագ Հղումներ",
         contactUs: "Կապ Մեզ Հետ",
-        rightsReserved: "Բոլոր իրավունքները պաշտպանված են:"
+        rightsReserved: "Բոլոր իրավունքները պաշտպանված են:",
+        // ... (պահպանեք մնացածը, ավելացրեք սրանք)
+        learnTitle: "Սուրճի և Թեյի Վարպետաց Դասեր",
+        learnSubtitle: "Բացահայտեք պատրաստման, համտեսման և լավագույն հատիկների ընտրության գաղտնիքները",
+        readMore: "Կարդալ Ավելին",
+        giftTitle: "Նվերների Ուղեցույց",
+        giftSubtitle: "Հատուկ ընտրված սուրճի և թեյի հավաքածուներ՝ ձեր սիրելիներին ուրախացնելու համար",
+        giftTag: "Բացառիկ Տուփեր",
+        exploreGifts: "Դիտել Հավաքածուները",
+
+        // Learn Articles
+        art1Title: "V60 Պատրաստման Արվեստը",
+        art1Desc: "Յուրացրեք ջրի ճշգրիտ ջերմաստիճանը, լցման տեխնիկան և համամասնությունը՝ մաքուր և հագեցած բաժակ ստանալու համար:",
+        art2Title: "Ճիշտ Աղացման Չափի Ընտրությունը",
+        art2Desc: "Ֆրանսիական մամլոսի կոպիտ աղացումից մինչև էսպրեսսոյի մանրացված տեսակներ․ ինչպես է աղացումը ազդում համի վրա:",
+        art3Title: "Համային Նոտաների Բացահայտումը",
+        art3Desc: "Ուսումնասիրեք մրգային, ծաղկային և շոկոլադե երանգները Եթովպիայից, Կոլումբիայից և այլ երկրներից:",
+
+        // Gift Sets
+        gift1Title: "Առավոտյան Նվեր-Տուփ",
+        gift1Desc: "Ներառում է եթովպական հատիկներ, կերամիկական ձագար և բրենդային ֆինջան։",
+        gift2Title: "Արհեստագործական Թեյերի Հավաքածու",
+        gift2Desc: "Հազվագյուտ օրգանական բուսական թեյերի ընտրանի՝ էլեգանտ փայտե տուփով։",
+        gift3Title: "Բարիստայի Պրեմիում Հավաքածու",
+        gift3Desc: "Մասնագիտական սեղմիչ, ճշգրիտ կշեռք և մեր լավագույն մուգ տապակած հատիկների երկու տուփ։"
     },
     ru: {
         home: "Главная",
@@ -190,7 +238,32 @@ const translations = {
         footerDesc: "Откройте для себя лучший выбор кофе специальной обжарки, редких чаев и премиальных аксессуаров с доставкой до вашей двери.",
         quickLinks: "Быстрые ссылки",
         contactUs: "Свяжитесь с нами",
-        rightsReserved: "Все права защищены."
+        rightsReserved: "Все права защищены.",
+        // ... (պահպանեք մնացածը, ավելացրեք սրանք)
+        learnTitle: "Мастер-классы по кофе и чаю",
+        learnSubtitle: "Узнайте секреты заваривания, дегустации и выбора лучших зерен",
+        readMore: "Читать статью",
+        giftTitle: "Гид по подаркам",
+        giftSubtitle: "Подобранные наборы кофе и чая, созданные чтобы радовать близких",
+        giftTag: "Эксклюзивные наборы",
+        exploreGifts: "Смотреть наборы",
+
+        // Learn Articles
+        art1Title: "Искусство заваривания V60",
+        art1Desc: "Освойте точную температуру воды, технику вливания и соотношение для идеальной чашки.",
+        art2Title: "Выбор правильного помола",
+        art2Desc: "От грубого для френч-пресса до ультратонкого для эспрессо — как помол влияет на экстракцию.",
+        art3Title: "Понимание кофейных нот",
+        art3Desc: "Изучите фруктовые, цветочные и шоколадные оттенки из Эфиопии, Колумбии и других стран.",
+
+        // Gift Sets
+        gift1Title: "Набор «Утреннее блаженство»",
+        gift1Desc: "Включает моносорт из Эфиопии, керамический пуровер и фирменную чашку.",
+        gift2Title: "Коллекция элитных чаев",
+        gift2Desc: "Ассорти редких органических травяных чаев в элегантной деревянной шкатулке.",
+        gift3Title: "Профессиональный набор бариста",
+        gift3Desc: "Профессиональный темпер, точные весы и две пачки фирменного темного обжара."
+    
     }
 }
 
